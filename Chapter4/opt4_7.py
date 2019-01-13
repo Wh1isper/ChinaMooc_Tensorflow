@@ -23,7 +23,7 @@ X = np.vstack(X).reshape(-1, 2)
 Y_ = np.vstack(Y_).reshape(-1, 1)
 print(X, Y_, Y_c)
 # 用plt.scatter画出数据集
-# 横坐标为X第一列元素，Y坐标为X第二列元素
+# 横坐标为X第一列元素，纵坐标为X第二列元素
 plt.scatter(X[:, 0], X[:, 1], c=np.squeeze(Y_c))
 plt.show()
 

@@ -23,9 +23,9 @@ y = tf.matmul(x,w1)
 
 # 2定义损失函数及反向传播方法
 # 定义损失函数为自定义损失函数，反向传播方法为梯度下降
-loss_mse = tf.reduce_mean(tf.where(tf.greater(y,y_),(y - y_)*COST,(y_ - y)*PROFIT))
+loss = tf.reduce_mean(tf.where(tf.greater(y,y_),(y - y_)*COST,(y_ - y)*PROFIT))
 optimizer = tf.train.GradientDescentOptimizer(0.001)
-train_step = optimizer.minimize(loss_mse)   #用梯度下降的方法求loss_mse极小
+train_step = optimizer.minimize(loss)   #用梯度下降的方法求loss_mse极小
 
 # 3生成会话， 训练STEPS轮
 with tf.Session() as sess:
@@ -39,7 +39,7 @@ with tf.Session() as sess:
         # print(start,end)
         sess.run(train_step, feed_dict={x: X[start:end], y_: Y_[start:end]})
         if i % 500 == 0:
-            total_loss = sess.run(loss_mse, feed_dict={x: X, y_: Y_})
+            total_loss = sess.run(loss, feed_dict={x: X, y_: Y_})
             print("After {} training step(s),w1 is {}".format(i, sess.run(w1)))
     print("Final w1 is:", sess.run(w1))
 
